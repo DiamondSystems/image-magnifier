@@ -21,7 +21,7 @@ $('.yourImageBlock > img').imageMagnifier({
 ```
 
 ## Example of use
-Examples are shown in the "examples/index.html"
+Examples are shown in the "[examples/index.html](https://github.com/DevDiamondCom/image-magnifier/blob/master/examples/index.html "")"
 
 ## License
 Copyright (C) 2016 DevDiamond. (email : me@devdiamond.com)
