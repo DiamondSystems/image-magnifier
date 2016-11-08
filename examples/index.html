@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Magnifier - Examples</title>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <!-- OR <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>-->
+    <script src="js/image-magnifier.min.js"></script>
+    <style type="text/css">
+        .image_block img {
+            width: 500px;
+            border: 3px solid #999;
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+        }
+    </style>
+    <script type="application/javascript">
+        // Load Image Magnifier
+        $('.image_block > img').imageMagnifier({
+            magPercent    : 120,      // Magnifier percent (default: 100%)
+            magPosition   : 'right',  // Magnifier position (default: 'right')[top, bottom, left, right]
+            magIndent     : 10,       // Magnifier indent (default: 10)
+            cursorWidth   : 0,        // Cursor width (default: 0)(if 'cursorPercent' is not specified)
+            cursorHeight  : 0,        // Cursor height (default: 0)(if 'cursorPercent' is not specified)
+            cursorPercent : 45,       // Cursor percent (default: 45)('cursorWidth' and 'cursorHeight' is set automatically on the percentage of image)
+            cursorType    : 'pointer' // Cursor Type CSS Style name (default: 'pointer')[default, crosshair, move, pointer, etc]
+        });
+    </script>
+</head>
+<body>
+<div class="image_block">
+    <img src="img/image1.jpg">
+</div>
+<div class="image_block">
+    <img src="img/image2.jpg">
+</div>
+<div class="image_block">
+    <img src="img/image3.jpg">
+</div>
+<div class="image_block">
+    <img src="img/image4.jpg">
+</div>
+</body>
+</html>
