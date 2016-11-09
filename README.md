@@ -4,7 +4,9 @@
 
 ##The use and configuration
 ```javascript
+<!-- jQuery 1.7.2 and above-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<!-- ImageMagnifier -->
 <script src="image-magnifier.min.js"></script>
 <script type="text/javascript">
 // Load Image Magnifier
