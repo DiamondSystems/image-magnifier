@@ -20,6 +20,13 @@ $('.yourImageBlock > img').imageMagnifier({
 </script>
 ```
 
+## Frontend blocks and attributes
+To create your own styles and properties
+```html
+<div class="dd_image_magnifier_cursor"></div><!-- Cursor block -->
+<div class="dd_image_magnifier_block"></div><!-- Magnifier block -->
+```
+
 ## Example of use
 Examples are shown in the "[examples/index.html](https://github.com/DevDiamondCom/image-magnifier/blob/master/examples/index.html "")"
 
