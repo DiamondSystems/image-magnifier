@@ -21,7 +21,7 @@ $('.yourImageBlock > img').imageMagnifier({
 ```
 
 ## Frontend blocks and attributes
-To create your own styles and properties
+Create a script Image Magnifier. To create your own styles and properties
 ```html
 <div class="dd_image_magnifier_cursor"></div><!-- Cursor block -->
 <div class="dd_image_magnifier_block"></div><!-- Magnifier block -->
