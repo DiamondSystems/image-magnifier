@@ -5,7 +5,7 @@
  * @author    DevDiamond <me@devdiamond.com>
  * @copyright (c) 2016 DevDiamond. (email : me@devdiamond.com)
  * @licence   GPLv3 or later - http://www.gnu.org/licenses/gpl-3.0.html
- * @version   1.0.0
+ * @version   1.0.1
  */
 (function($, document, undefined)
 {
@@ -14,13 +14,14 @@
     {
         // Options
         var defaults = {
-            magPercent    : 100,
-            magPosition   : 'right', // (top, bottom, left, right)
-            magIndent     : 10,
-            cursorWidth   : 0,
-            cursorHeight  : 0,
-            cursorPercent : 45,
-            cursorType    : 'pointer' // Cursor Type CSS Style name (default, crosshair, move, pointer, etc)
+            magPercent      : 100,
+            magPosition     : 'right', // (top, bottom, left, right)
+            magIndent       : 10,
+            cursorWidth     : 0,
+            cursorHeight    : 0,
+            cursorPercent   : 45,
+            cursorType      : 'pointer', // Cursor Type CSS Style name (default, crosshair, move, pointer, etc)
+            minDisplayWidth : 0          // Min display width on the px
         };
         opts = $.extend(defaults, opts || {});
 
@@ -62,15 +63,18 @@
             opts.magIndent = parseInt(opts.magIndent);
 
             // Mag. Cursor
-            opts.cursorPercent = parseFloat(opts.cursorPercent);
-            opts.cursorWidth   = parseInt(opts.cursorWidth);
-            opts.cursorHeight  = parseInt(opts.cursorHeight);
+            opts.cursorPercent   = parseFloat(opts.cursorPercent);
+            opts.cursorWidth     = parseInt(opts.cursorWidth);
+            opts.cursorHeight    = parseInt(opts.cursorHeight);
+            opts.minDisplayWidth = parseInt(opts.minDisplayWidth);
             if ( opts.cursorWidth < 1 )
                 opts.cursorWidth = 100;
             if ( opts.cursorHeight < 1 )
                 opts.cursorHeight = 100;
             if ( opts.cursorType == '' )
                 opts.cursorType = 'pointer';
+            if ( opts.minDisplayWidth < 0 )
+                opts.minDisplayWidth = 0;
 
             var mag = {
                 //Mag. cursor coordinate
@@ -97,13 +101,29 @@
                     magImgTop  = magImgTop + ((magImgTop * opts.magPercent) / 100);
                     magImgLeft = imgLeft - cursorLeft;
                     magImgLeft = magImgLeft + ((magImgLeft * opts.magPercent) / 100);
+                },
+
+                // Is display show
+                is_display: function()
+                {
+                    if ( opts.minDisplayWidth > $(window).width() )
+                    {
+                        if ( is_magBlock )
+                        {
+                            is_magBlock = false;
+                            $(magClass).stop().fadeOut(150);
+                            $(curClass).stop().fadeOut(150);
+                        }
+                        return false;
+                    }
+                    return true;
                 }
             };
 
             // Image Mousemove Action
             $(document).on('mousemove', opts.imgExpr, function(e)
             {
-                if ( is_magBlock || e.target.src == '' || typeof(e.target.src) === "undefined" )
+                if ( ! mag.is_display() || is_magBlock || e.target.src == '' || typeof(e.target.src) === "undefined" )
                     return;
 
                 // Current Image coordinate
@@ -197,6 +217,9 @@
             // Mag. Cursor MouseMove Action
             $(document.body).on('mousemove', curClass, function(e)
             {
+                if ( ! mag.is_display() )
+                    return;
+
                 mag.cursor_coordinate( e.pageX, e.pageY );
                 $(curClass).css({
                     'width':    opts.cursorWidth +'px',
@@ -217,6 +240,9 @@
             // Mag. Cursor MouseOut Action
             $(document.body).on('mouseout', curClass, function()
             {
+                if ( ! mag.is_display() )
+                    return;
+
                 is_magBlock = false;
                 $(magClass).stop().fadeOut(150);
                 $(curClass).stop().fadeOut(150);
